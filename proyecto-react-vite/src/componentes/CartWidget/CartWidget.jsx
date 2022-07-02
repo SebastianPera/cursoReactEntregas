@@ -1,4 +1,4 @@
-import imagenCart from '../../imagenes/imagenCart.png'
+import imagenCart from '../../assets/img/imagenCart.png'
 import '../../estilos/CartWidget.css'
 
 const CartWidget = () => {
