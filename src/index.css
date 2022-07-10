@@ -1,0 +1,15 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,body{
+  font-size: 18px;
+  background-color: #f5f6f7;
+  min-height: 100vh;
+}
+
+a{
+  text-decoration: none;
+}

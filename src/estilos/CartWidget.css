@@ -1,0 +1,8 @@
+.contenedorCarrito{
+    width: 40%;
+    display: flex;
+    justify-content: start;
+}
+.imagenCart{
+    width: 20%;
+}

@@ -1,0 +1,13 @@
+.cardEstilo{
+    height: 20rem;
+}
+.contenedorImg{
+    height: 35%;
+}
+
+.cardImg{
+    width: auto;
+    height: 100%;
+    object-fit: contain;
+
+}
