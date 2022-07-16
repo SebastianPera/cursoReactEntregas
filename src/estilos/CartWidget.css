@@ -1,8 +1,8 @@
 .contenedorCarrito{
-    width: 40%;
+    width: 100%;
     display: flex;
-    justify-content: start;
+    justify-content: end;
 }
 .imagenCart{
-    width: 20%;
+    width: 40px;
 }

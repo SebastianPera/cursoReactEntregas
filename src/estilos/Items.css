@@ -2,7 +2,13 @@
     height: 20rem;
 }
 .contenedorImg{
-    height: 35%;
+    height: 40%;
+}
+.cardBody{
+    height: 40%;
+}
+.card-header{
+    height: 20%;
 }
 
 .cardImg{

@@ -12,11 +12,11 @@ function Items( {products} ) {
                 <Card.Img variant="top" src={require(`../../../src/img/productos/${products.imagen}`)} className="p-2 cardImg" />
             </div>            
             <Card.Body className='cardBody'>
-            <Card.Text>${products.precio}</Card.Text>
-            <Link to={`/detail/${products.codigo}`}>
-                <Button>Ver más</Button>
-            </Link>
-            </Card.Body>
+                <Card.Text>${products.precio}</Card.Text>
+                <Link to={`/detail/${products.id}`}>
+                    <Button>Ver detalle</Button>
+                </Link>
+            </Card.Body >
         </Card>
     )
 }

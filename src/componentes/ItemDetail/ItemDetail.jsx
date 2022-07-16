@@ -1,8 +1,17 @@
-import React from 'react'
+import { useContext } from 'react'
+import { CartContext} from '../../context/CartContext.js'
+import ItemCount from '../ItemCount/ItemCount'
 import '../../estilos/ItemDetail.css'
 
 
 function ItemDetail({ prod }) {
+
+  const cartContext = useContext(CartContext);
+  const { addToCart } = cartContext;
+
+  const onAdd = (qty) => {
+    addToCart(prod, qty)
+  }
 
   return (
     <div className="container mt-5 mb-5">
@@ -12,11 +21,11 @@ function ItemDetail({ prod }) {
             <div className="row">
               <div className="col-md-6">
                 <div className="images p-3">
-                  <div className="text-center p-4"> <img id="main-image" src={require(`../../../src/img/productos/${prod.imagen}`)} width="250" /> </div>
+                  <div className="text-center"> <img id="main-image" src={require(`../../../src/img/productos/${prod.imagen}`)} width="250" /> </div>
                 </div>
               </div>
               <div className="col-md-6">
-                <div className="product p-4">
+                <div className="product p-4 h-100">
                   <div className="d-flex justify-content-between align-items-center">
                     <div className="d-flex align-items-center"> <i className="fa fa-long-arrow-left"></i> <span className="ml-1">Back</span> </div> <i className="fa fa-shopping-cart text-muted"></i>
                   </div>
@@ -27,7 +36,7 @@ function ItemDetail({ prod }) {
                     </div>
                   </div>
                   <p className="about">{prod.detalle}</p>
-                  <div className="cart mt-4 align-items-center"> <button className="btn btn-danger text-uppercase mr-2 px-4">Add to cart</button> <i className="fa fa-heart text-muted"></i> <i className="fa fa-share-alt text-muted"></i> </div>
+                  <ItemCount stock={prod.stock} initial={1} onAdd={onAdd}/>
                 </div>
               </div>
             </div>

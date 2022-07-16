@@ -16,12 +16,12 @@ const ItemDetailContainer = () => {
     setTimeout(() => {
       fetch(`.${url}`)
       .then((res) => res.json())
-      .then(data => setProd(data.find( prod => prod.codigo === id)))
+      .then(data => setProd(data.find( prod => prod.id === id)))
       .catch(err => console.log(err))
       .finally(() => {
         setLoading(false);
       });
-    }, 1500);   
+    }, 500);   
   }, [])
 
 

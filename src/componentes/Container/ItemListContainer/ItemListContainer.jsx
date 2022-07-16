@@ -23,7 +23,7 @@ const ItemListContainer = () => {
         .finally(() => {
           setLoading(false);
         });
-      }, 1500);   
+      }, 1000);   
 
     } else {  
       loading = true;
@@ -36,7 +36,7 @@ const ItemListContainer = () => {
           .finally(() => {
             setLoading(false);
           });
-        }, 1500);
+        }, 1000);
       } else {
         console.log('400 not found');
       }
