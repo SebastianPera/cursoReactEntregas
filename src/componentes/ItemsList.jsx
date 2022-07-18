@@ -1,5 +1,5 @@
 import { Container } from 'react-bootstrap';
-import Items from '../Items/Items';
+import Items from './Items';
 
 
 function ItemsList({ producto }) {

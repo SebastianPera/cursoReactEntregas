@@ -1,7 +1,8 @@
 import { useContext } from 'react'
-import { CartContext} from '../../context/CartContext.js'
-import ItemCount from '../ItemCount/ItemCount'
-import '../../estilos/ItemDetail.css'
+import { CartContext} from '../context/CartContext.js'
+import ItemCount from '../componentes/ItemCount'
+import '../estilos/ItemDetail.css'
+
 
 
 function ItemDetail({ prod }) {
@@ -13,6 +14,8 @@ function ItemDetail({ prod }) {
     addToCart(prod, qty)
   }
 
+  
+
   return (
     <div className="container mt-5 mb-5">
       <div className="row d-flex justify-content-center">
@@ -21,7 +24,7 @@ function ItemDetail({ prod }) {
             <div className="row">
               <div className="col-md-6">
                 <div className="images p-3">
-                  <div className="text-center"> <img id="main-image" src={require(`../../../src/img/productos/${prod.imagen}`)} width="250" /> </div>
+                  <div className="text-center"> <img id="main-image" src={require(`../../src/img/productos/${prod.imagen}`)} width="250" /> </div>
                 </div>
               </div>
               <div className="col-md-6">
@@ -36,7 +39,7 @@ function ItemDetail({ prod }) {
                     </div>
                   </div>
                   <p className="about">{prod.detalle}</p>
-                  <ItemCount stock={prod.stock} initial={1} onAdd={onAdd}/>
+                  <ItemCount initial={1} onAdd={onAdd} prod={prod}/>
                 </div>
               </div>
             </div>

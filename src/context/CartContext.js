@@ -1,5 +1,5 @@
 import { createContext, useState } from "react";
-import ItemCount from "../componentes/ItemCount/ItemCount";
+import ItemCount from "../componentes/ItemCount";
 
 export const CartContext = createContext();
 
@@ -13,18 +13,19 @@ const CartProvider = ( {children} ) => {
             let index = cart.findIndex(el => el.id === prod.id);
             let product = cart[index];
             product.qty = product.qty + qty;
+            // prod.stock = prod.stock - qty;
 
             const newCart = [...cart];
             newCart.splice(index, 1, product);
 
             setCart([...newCart])
-        
+
         }else{
             let product = {...prod, qty};
             setCart([...cart, product]);
+            // prod.stock = prod.stock - product.qty;        
         }
     }
-    console.log(cart);
     const deleteCartById = ( id ) => {
         const newCart = [...cart];
         let index = newCart.findIndex(el => el.id === id);

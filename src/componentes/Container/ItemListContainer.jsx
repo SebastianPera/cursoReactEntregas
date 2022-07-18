@@ -2,8 +2,8 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import { Spinner } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
-import ItemsList from '../../ItemList/ItemsList';
-import '../../../estilos/ItemListContainer.css';
+import ItemsList from '../ItemsList';
+import '../../estilos/ItemListContainer.css';
 
 
 const ItemListContainer = () => {
