@@ -1,5 +1,5 @@
-import { useEffect } from 'react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { collection, getDocs, getFirestore, query, where } from 'firebase/firestore'
 import { Spinner } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 import ItemsList from '../ItemsList';
@@ -10,38 +10,69 @@ const ItemListContainer = () => {
   const [products , setProducts] = useState([]);
   let [loading, setLoading] = useState(true);
   const { categoriaId } = useParams();
-  const url = './bd.json'
+  // const url = './bd.json'
 
   useEffect(() => {
     setLoading(true)
-    if (categoriaId) {
+    if (categoriaId){
       setTimeout(() => {
-        fetch(`.${url}`)
-        .then((res) => res.json())
-        .then(data => setProducts(data.filter( prod => prod.categoria === categoriaId)))
+        const db = getFirestore();
+        const queryCollection = collection(db, 'productos')
+        const queryCollectionFilter = query(queryCollection, where('categoria', '==', categoriaId))
+        getDocs(queryCollectionFilter)
+        .then(resp => setProducts(resp.docs.map(prod => ({ id: prod.id, ...prod.data() }))))
         .catch(err => console.log(err))
-        .finally(() => {
-          setLoading(false);
-        });
-      }, 1000);   
+        .finally(() => setLoading(false))
+      }, 500);
 
-    } else {  
+    }else{
       loading = true;
-      if (loading) {
+      if(loading){
         setTimeout(() => {
-          fetch(url)
-          .then((res) => res.json())
-          .then(data => setProducts(data))
+          const db = getFirestore();
+          const queryCollection = collection(db, 'productos')
+          getDocs(queryCollection)
+          .then(resp => setProducts(resp.docs.map(prod => ({ id: prod.id, ...prod.data() }))))
           .catch(err => console.log(err))
-          .finally(() => {
-            setLoading(false);
-          });
-        }, 1000);
-      } else {
+          .finally(() => setLoading(false))
+        }, 500);
+      }else{
         console.log('400 not found');
       }
     }
   }, [categoriaId])
+  
+
+  // useEffect(() => {
+  //   setLoading(true)
+  //   if (categoriaId) {
+  //     setTimeout(() => {
+  //       fetch(`.${url}`)
+  //       .then((res) => res.json())
+  //       .then(data => setProducts(data.filter( prod => prod.categoria === categoriaId)))
+  //       .catch(err => console.log(err))
+  //       .finally(() => {
+  //         setLoading(false);
+  //       });
+  //     }, 1000);   
+
+  //   } else {  
+  //     loading = true;
+  //     if (loading) {
+  //       setTimeout(() => {
+  //         fetch(url)
+  //         .then((res) => res.json())
+  //         .then(data => setProducts(data))
+  //         .catch(err => console.log(err))
+  //         .finally(() => {
+  //           setLoading(false);
+  //         });
+  //       }, 1000);
+  //     } else {
+  //       console.log('400 not found');
+  //     }
+  //   }
+  // }, [categoriaId])
 
  
   return ( loading ? (

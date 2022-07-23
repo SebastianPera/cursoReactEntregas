@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom"
 import { useEffect,useState } from "react";
 import { Spinner } from 'react-bootstrap';
+import { doc, getDoc, getFirestore } from "firebase/firestore";
 import ItemDetail from '../ItemDetail'
 
 
@@ -8,21 +9,31 @@ const ItemDetailContainer = () => {
   const { id } = useParams();
   const [prod , setProd] = useState([]);
   let [loading, setLoading] = useState(true);
-  const url = './bd.json';
-
+  // const url = './bd.json';
 
   useEffect(() => {
-  
     setTimeout(() => {
-      fetch(`.${url}`)
-      .then((res) => res.json())
-      .then(data => setProd(data.find( prod => prod.id === id)))
+      const db = getFirestore()
+      const queryProduct = doc(db, 'productos', id)
+      getDoc(queryProduct)     
+      .then(resp => setProd({ id: resp.id, ...resp.data() }))
       .catch(err => console.log(err))
-      .finally(() => {
-        setLoading(false);
-      });
-    }, 500);   
+      .finally(() => setLoading(false) )
+    }, 500);  
   }, [])
+  
+
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     fetch(`.${url}`)
+  //     .then((res) => res.json())
+  //     .then(data => setProd(data.find( prod => prod.id === id)))
+  //     .catch(err => console.log(err))
+  //     .finally(() => {
+  //       setLoading(false);
+  //     });
+  //   }, 500);   
+  // }, [])
 
 
   return ( loading ? (

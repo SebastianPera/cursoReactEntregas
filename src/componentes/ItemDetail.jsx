@@ -1,5 +1,6 @@
 import { useContext } from 'react'
 import { CartContext} from '../context/CartContext.js'
+import { Link } from 'react-router-dom';
 import ItemCount from '../componentes/ItemCount'
 import '../estilos/ItemDetail.css'
 
@@ -30,7 +31,7 @@ function ItemDetail({ prod }) {
               <div className="col-md-6">
                 <div className="product p-4 h-100">
                   <div className="d-flex justify-content-between align-items-center">
-                    <div className="d-flex align-items-center"> <i className="fa fa-long-arrow-left"></i> <span className="ml-1">Back</span> </div> <i className="fa fa-shopping-cart text-muted"></i>
+                    <div className="d-flex align-items-center"> <i className="fa fa-long-arrow-left"></i> <Link to='/'><span className="ml-1">Back</span></Link> </div> <i className="fa fa-shopping-cart text-muted"></i>
                   </div>
                   <div className="mt-4 mb-3">
                     <h5 className="text-uppercase">{prod.nombre}</h5>

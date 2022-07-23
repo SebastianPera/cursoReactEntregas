@@ -21,11 +21,9 @@ const ItemCount = ({ initial, onAdd, prod}) => {
         let index = cart.findIndex(el => el.id === prod.id);
         prodCart = (cart[index]);       
         stockComparativo1 = prod.stock - prodCart.qty;  
-        console.log(stockComparativo1);
     }else{
         prodCart = {...prod, qty};  
         stockComparativo2 = prod.stock - prodCart.qty;
-        console.log(stockComparativo2);
     }
 
     const addProduct = (num) => {
@@ -50,11 +48,11 @@ const ItemCount = ({ initial, onAdd, prod}) => {
                 +
                 </button>
             </div>
-            {(stockComparativo1 === 0) ||<button className="btn btn-danger text-uppercase mt-2 px-2" onClick={() => {onAdd(qty); setshowButton(true); setQty(initial)}} disabled={(stockComparativo1 === 0) ? true : null}>
+            {(stockComparativo1 === 0) ||<button className="btn btn-danger text-uppercase mt-2 px-2" style={{width: '100%'}} onClick={() => {onAdd(qty); setshowButton(true); setQty(initial)}} disabled={(stockComparativo1 === 0) ? true : null}>
                 Añadir al carrito
             </button>
             }
-            { (showButton || cart.length !== 0 ) && <Link to="/cart"><button className="btn btn-danger text-uppercase mt-2 px-2">Finalizar Compra</button></Link> }
+            { (showButton || cart.length !== 0 ) && <Link to="/cart"><button className="btn btn-danger text-uppercase mt-2 px-2" style={{width: '100%'}}>Finalizar Compra</button></Link> }
         </div>
     )
 };
