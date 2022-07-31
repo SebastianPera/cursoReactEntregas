@@ -12,7 +12,6 @@ const CartProvider = ( {children} ) => {
             let index = cart.findIndex(el => el.id === prod.id);
             let product = cart[index];
             product.qty = product.qty + qty;
-            // prod.stock = prod.stock - qty;
 
             const newCart = [...cart];
             newCart.splice(index, 1, product);
@@ -21,8 +20,7 @@ const CartProvider = ( {children} ) => {
 
         }else{
             let product = {...prod, qty};
-            setCart([...cart, product]);
-            // prod.stock = prod.stock - product.qty;        
+            setCart([...cart, product]);    
         }
     }
     const deleteCartById = ( id ) => {

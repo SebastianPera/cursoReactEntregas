@@ -8,8 +8,7 @@ import ItemDetail from '../ItemDetail'
 const ItemDetailContainer = () => {
   const { id } = useParams();
   const [prod , setProd] = useState([]);
-  let [loading, setLoading] = useState(true);
-  // const url = './bd.json';
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     setTimeout(() => {
@@ -22,20 +21,6 @@ const ItemDetailContainer = () => {
     }, 500);  
   }, [])
   
-
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     fetch(`.${url}`)
-  //     .then((res) => res.json())
-  //     .then(data => setProd(data.find( prod => prod.id === id)))
-  //     .catch(err => console.log(err))
-  //     .finally(() => {
-  //       setLoading(false);
-  //     });
-  //   }, 500);   
-  // }, [])
-
-
   return ( loading ? (
     <div className="text-center mt-4">
       <Spinner animation="border" role="status" variant="info"/>

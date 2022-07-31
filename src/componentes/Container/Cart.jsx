@@ -12,7 +12,6 @@ const Cart = () => {
   const cartContext = useContext(CartContext);
   const { cart, deleteCartById, deleteCart, totalCart } = cartContext;
 
-
   return (
     <div className='cartContainer'>
       <div className='listCartContainer'>
@@ -31,7 +30,9 @@ const Cart = () => {
                         className='btn btn-danger text-uppercase mt-2 px-2'
                         onClick={deleteCart}
                         >Vaciar Carrito</button>
-                        <button className='btn btn-danger text-uppercase mt-2 px-2'> Finalizar compra</button>
+                        <Link to='/checkout'>
+                          <button className='btn btn-danger text-uppercase mt-2 px-2'> Finalizar compra</button>
+                        </Link>
                         <p>TOTAL: ${totalCart()} </p>
                       </div> 
                       : <div>

@@ -15,25 +15,23 @@ function ItemDetail({ prod }) {
     addToCart(prod, qty)
   }
 
-  
-
   return (
     <div className="container mt-5 mb-5">
       <div className="row d-flex justify-content-center">
         <div className="col-md-10">
           <div className="card">
             <div className="row">
-              <div className="col-md-6">
-                <div className="images p-3">
-                  <div className="text-center"> <img id="main-image" src={require(`../../src/img/productos/${prod.imagen}`)} width="250" /> </div>
+              <div className="col-md-6 h-50">
+                <div className="h-100 p-3">
+                  <img id="main-image" src={require(`../../src/img/productos/${prod.imagen}`)}/>
                 </div>
               </div>
-              <div className="col-md-6">
-                <div className="product p-4 h-100">
+              <div className="col-md-6 h-50">
+                <div className="product h-100 p-3">
                   <div className="d-flex justify-content-between align-items-center">
                     <div className="d-flex align-items-center"> <i className="fa fa-long-arrow-left"></i> <Link to='/'><span className="ml-1">Back</span></Link> </div> <i className="fa fa-shopping-cart text-muted"></i>
                   </div>
-                  <div className="mt-4 mb-3">
+                  <div className="mt-2 mb-2">
                     <h5 className="text-uppercase">{prod.nombre}</h5>
                     <div className="price d-flex flex-row align-items-center"> 
                       <span className="act-price">${prod.precio}</span>

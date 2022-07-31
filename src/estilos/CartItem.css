@@ -5,6 +5,7 @@
     justify-content: space-between;
     padding: 0 1rem;
     box-shadow: 0.3125rem 0.3125rem 0.25rem -0.0625rem rgba(0, 0, 0, 0.08);
+    background-color: white;
 }
 .contenedorImagen{
     padding: 0.4rem;
