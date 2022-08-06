@@ -23,7 +23,7 @@ function ItemDetail({ prod }) {
             <div className="row">
               <div className="col-md-6 h-50">
                 <div className="h-100 p-3">
-                  <img id="main-image" src={require(`../../src/img/productos/${prod.imagen}`)}/>
+                  <img id="main-image" src={require(`../../src/img/productos/${prod.imagen}`)} alt={`${prod.nombre}`}/>
                 </div>
               </div>
               <div className="col-md-6 h-50">

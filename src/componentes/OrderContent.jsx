@@ -6,7 +6,9 @@ import { Formik, ErrorMessage, Form, Field } from 'formik';
 import { Timestamp, getFirestore, collection, addDoc } from 'firebase/firestore';
 import { confirmationAlert } from '../helpers/Alerts';
 import { Link } from 'react-router-dom';
+import { documentId, query, where, writeBatch, getDocs } from 'firebase/firestore';
 import '../estilos/Order.css'
+
 
 
 // Objeto para validar el form
@@ -34,7 +36,51 @@ const FormValidation = Yup.object().shape({
 // Control del form
 
 export const OrderContent = () => {
-    const { cart, totalCart, deleteCart } = useContext(CartContext);
+  const { cart, totalCart, deleteCart } = useContext(CartContext);
+
+  async function formData(dataForm) {
+    let newOrder = {
+      buyer:{
+          name: dataForm.name,
+          email: dataForm.email,
+          phone: dataForm.phone,
+      },
+      items: cart.map(prod => ({
+          id: prod.id,
+          title: prod.nombre,
+          price: prod.precio,
+          quantity: prod.qty,
+      })),
+      total: totalCart(),
+      date: Timestamp.fromDate(new Date()),
+    }
+
+    // Enviar orden a Firebase
+    const db = getFirestore()
+    const orders = collection(db, 'orders')
+    addDoc(orders, newOrder)
+    .then((resp) => 
+      confirmationAlert(
+          "Orden de compra exitosa",
+          `Nº de compra ${resp.id}`
+      )
+    )
+    .catch(err => console.log(err))
+    .finally(() => deleteCart())
+
+
+    // Actualizar stock
+    const queryCollectionStock = collection(db, 'productos')
+    const upDateStock = query(queryCollectionStock, where(documentId(), 'in', cart.map(prod => prod.id)))
+    const batch = writeBatch(db)
+  
+    await getDocs(upDateStock).then(resp => resp.docs.forEach(res => batch.update(res.ref, {
+      stock: res.data().stock - cart.find(prod => prod.id === res.id).qty
+    })))
+    batch.commit()
+  }
+  
+
   return (
     <div>
         <Formik
@@ -45,36 +91,7 @@ export const OrderContent = () => {
               phone: "",
           }}
           validationSchema={FormValidation}
-          onSubmit={(formData) => {
-              const newOrder = {
-                  buyer:{
-                      name: formData.name,
-                      email: formData.email,
-                      phone: formData.phone,
-                  },
-                  items: cart.map(prod => ({
-                      id: prod.id,
-                      title: prod.nombre,
-                      price: prod.precio,
-                      quantity: prod.qty,
-                  })),
-                  total: totalCart(),
-                  date: Timestamp.fromDate(new Date()),
-              };
-
-              // Enviar orden a Firebase
-              const db = getFirestore()
-              const orders = collection(db, 'orders')
-              addDoc(orders, newOrder)
-              .then((resp) => 
-                confirmationAlert(
-                    "Orden de compra exitosa",
-                    `Nº de compra ${resp.id}`
-                )
-              )
-              .catch(err => console.log(err))
-              .finally(() => deleteCart())
-          }}
+          onSubmit={formData}
         > 
           {() => (
             <>   

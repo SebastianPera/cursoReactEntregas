@@ -1,6 +1,7 @@
 import { useContext } from 'react'
-import { CartContext} from '../context/CartContext.js'
+import { useEffect } from 'react';
 import { useState } from 'react'
+import { CartContext} from '../context/CartContext.js'
 import { Link } from 'react-router-dom'
 import '../estilos/ItemCount.css'
 
@@ -9,22 +10,20 @@ const ItemCount = ({ initial, onAdd, prod}) => {
     const cartContext = useContext(CartContext);
     const { cart } = cartContext;
     const [ qty, setQty ] = useState(initial);
-    const [ showButton, setshowButton ] = useState(false);
-    let [ prodCart ] = useState({});
-    let [ stockComparativo1 ] = useState(prod.stock);
-    let [ stockComparativo2 ] = useState(prod.stock);
+    const [ stockComparative, setStockComparative ] = useState(prod.stock);
     
 
     // Comparo stock con cantidad en el carrito
-
-    if (cart.some(el => el.id === prod.id)) {
+    useEffect(() => {
+      if (cart.some(el => el.id === prod.id)) {
         let index = cart.findIndex(el => el.id === prod.id);
-        prodCart = (cart[index]);       
-        stockComparativo1 = prod.stock - prodCart.qty;  
-    }else{
-        prodCart = {...prod, qty};  
-        stockComparativo2 = prod.stock - prodCart.qty;
-    }
+        setStockComparative((prod.stock - cart[index].qty)); 
+          
+      }else{
+        setStockComparative(prod.stock);
+      }
+    }, [prod.stock,cart,prod.id])
+    
 
     const addProduct = (num) => {
         setQty(qty + num);
@@ -33,7 +32,7 @@ const ItemCount = ({ initial, onAdd, prod}) => {
 
     return(
         <div className='containerItemCount'>
-            <div>
+            <div style={{width: '100%'}}>
                 <button 
                 className="btn btn-danger px-3 py-1" 
                 onClick={() => addProduct(-1)} 
@@ -44,15 +43,15 @@ const ItemCount = ({ initial, onAdd, prod}) => {
                 <button 
                 className="btn btn-danger px-3 py-1" 
                 onClick={() => addProduct(+1)} 
-                disabled={(stockComparativo2 === 0 || stockComparativo1 <= qty) ? true : null}>
+                disabled={(stockComparative === 0 || stockComparative <= qty) ? true : null}>
                 +
                 </button>
+                <b style={{marginLeft: '1rem', fontSize: '90%'}}>{`stock disponible: ${stockComparative}`}</b>
             </div>
-            {(stockComparativo1 === 0) ||<button className="btn btn-danger text-uppercase mt-2 px-2" style={{width: '100%'}} onClick={() => {onAdd(qty); setshowButton(true); setQty(initial)}} disabled={(stockComparativo1 === 0) ? true : null}>
+            {stockComparative === 0 || <button className="btn btn-danger text-uppercase mt-2 px-2" style={{width: '100%'}} onClick={() => {onAdd(qty); setQty(initial)}} disabled={(stockComparative === 0) ? true : null}>
                 Añadir al carrito
-            </button>
-            }
-            { (showButton || cart.length !== 0 ) && <Link to="/cart"><button className="btn btn-danger text-uppercase mt-2 px-2" style={{width: '100%'}}>Finalizar Compra</button></Link> }
+            </button>}
+            { cart.length !== 0 && <Link to="/cart"><button className="btn btn-danger text-uppercase mt-2 px-2" style={{width: '100%'}}>Finalizar Compra</button></Link> }
         </div>
     )
 };

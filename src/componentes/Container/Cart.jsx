@@ -7,10 +7,12 @@ import '../../estilos/Cart.css'
 
 
 
+
 const Cart = () => {
 
   const cartContext = useContext(CartContext);
   const { cart, deleteCartById, deleteCart, totalCart } = cartContext;
+  
 
   return (
     <div className='cartContainer'>

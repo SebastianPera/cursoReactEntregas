@@ -19,7 +19,7 @@ const ItemDetailContainer = () => {
       .catch(err => console.log(err))
       .finally(() => setLoading(false) )
     }, 500);  
-  }, [])
+  })
   
   return ( loading ? (
     <div className="text-center mt-4">

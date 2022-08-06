@@ -11,34 +11,19 @@ const ItemListContainer = () => {
   const [loading, setLoading] = useState(true);
   const { categoriaId } = useParams();
 
-  useEffect(() => {
+  useEffect(() => {  
     setLoading(true)
-    if (categoriaId){
-      setTimeout(() => {
-        const db = getFirestore();
-        const queryCollection = collection(db, 'productos')
-        const queryCollectionFilter = query(queryCollection, where('categoria', '==', categoriaId))
-        getDocs(queryCollectionFilter)
-        .then(resp => setProducts(resp.docs.map(prod => ({ id: prod.id, ...prod.data() }))))
-        .catch(err => console.log(err))
-        .finally(() => setLoading(false))
-      }, 500);
+    setTimeout(() => {
+      const db = getFirestore();
+      const queryCollection = collection(db, 'productos')
+      const queryCollectionFilter = categoriaId ? query(queryCollection, where('categoria', '==', categoriaId)) : queryCollection
 
-    }else{
-      setLoading(true);
-      if(loading){
-        setTimeout(() => {
-          const db = getFirestore();
-          const queryCollection = collection(db, 'productos')
-          getDocs(queryCollection)
-          .then(resp => setProducts(resp.docs.map(prod => ({ id: prod.id, ...prod.data() }))))
-          .catch(err => console.log(err))
-          .finally(() => setLoading(false))
-        }, 500);
-      }else{
-        console.log('400 not found');
-      }
-    }
+      getDocs(queryCollectionFilter)
+      .then(resp => setProducts(resp.docs.map(prod => ({ id: prod.id, ...prod.data() }))))
+      .catch(err => console.log(err))
+      .finally(() => setLoading(false))
+    }, 500);
+
   }, [categoriaId])
  
   return ( loading ? (
