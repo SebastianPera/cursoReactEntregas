@@ -2,7 +2,7 @@ import imagenCart from '../img/imagenCart.png'
 import { useContext, useEffect } from 'react';
 import { CartContext } from '../context/CartContext';
 import { useState } from 'react';
-import '../estilos/CartWidget.css'
+import '../styles/CartWidget.css'
 
 
 const CartWidget = () => {

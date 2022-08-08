@@ -1,4 +1,4 @@
-import '../estilos/CartItem.css'
+import '../styles/CartItem.css'
 
 
 const CartItem = ({ prod, deleteCartById}) => {

@@ -1,11 +1,11 @@
 import {BrowserRouter, Routes, Route, Navigate} from 'react-router-dom'
 import CartProvider from './context/CartContext.js'
-import NavBar from './componentes/NavBar'
-import ItemListContainer from './componentes/Container/ItemListContainer';
-import Cart from './componentes/Container/Cart';
-import ItemDetailContainer from './componentes/Container/ItemDetailContainer';
-import NotFound from './componentes/NotFound';
-import { OrderForm } from './componentes/Container/Order';
+import NavBar from './components/NavBar'
+import ItemListContainer from './components/Container/ItemListContainer';
+import Cart from './components/Container/Cart';
+import ItemDetailContainer from './components/Container/ItemDetailContainer';
+import NotFound from './components/NotFound';
+import { OrderForm } from './components/Container/Order';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css'
@@ -19,7 +19,7 @@ function App() {
           <NavBar/>
           <Routes>
             <Route index path='/' element={<ItemListContainer/>}/>
-            <Route path='/categoria/:categoriaId' element={<ItemListContainer/>}/>
+            <Route path='/categoria/:categoryId' element={<ItemListContainer/>}/>
             <Route path='/detail/:id' element={<ItemDetailContainer/>}/>
             <Route path='/cart' element={<Cart/>}/>
             <Route path='/checkout' element={<OrderForm/>}></Route>

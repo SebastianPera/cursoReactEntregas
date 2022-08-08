@@ -2,18 +2,13 @@ import { useContext } from 'react';
 import { CartContext } from './../../context/CartContext';
 import { Link } from 'react-router-dom';
 import CartItem from '../CartItem';
-
-import '../../estilos/Cart.css'
-
-
-
+import '../../styles/Cart.css'
 
 const Cart = () => {
 
   const cartContext = useContext(CartContext);
   const { cart, deleteCartById, deleteCart, totalCart } = cartContext;
   
-
   return (
     <div className='cartContainer'>
       <div className='listCartContainer'>
@@ -23,10 +18,8 @@ const Cart = () => {
                             deleteCartById={deleteCartById}/>
                 );
         })) 
-
           : <p>cargando productos</p>
         }
-
         {cart.length? <div className='buttonsCart'>
                         <button
                         className='btn btn-danger text-uppercase mt-2 px-2'

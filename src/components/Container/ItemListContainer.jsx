@@ -1,22 +1,22 @@
 import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { collection, getDocs, getFirestore, query, where } from 'firebase/firestore'
 import { Spinner } from 'react-bootstrap';
-import { useParams } from 'react-router-dom';
 import ItemsList from '../ItemsList';
-import '../../estilos/ItemListContainer.css';
+import '../../styles/ItemListContainer.css';
 
 
 const ItemListContainer = () => {
   const [products , setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
-  const { categoriaId } = useParams();
+  const { categoryId } = useParams();
 
   useEffect(() => {  
     setLoading(true)
     setTimeout(() => {
       const db = getFirestore();
       const queryCollection = collection(db, 'productos')
-      const queryCollectionFilter = categoriaId ? query(queryCollection, where('categoria', '==', categoriaId)) : queryCollection
+      const queryCollectionFilter = categoryId ? query(queryCollection, where('categoria', '==', categoryId)) : queryCollection
 
       getDocs(queryCollectionFilter)
       .then(resp => setProducts(resp.docs.map(prod => ({ id: prod.id, ...prod.data() }))))
@@ -24,14 +24,14 @@ const ItemListContainer = () => {
       .finally(() => setLoading(false))
     }, 500);
 
-  }, [categoriaId])
+  }, [categoryId])
  
   return ( loading ? (
     <div className="text-center mt-4">
       <Spinner animation="border" role="status" variant="info"/>
     </div>
   ) : 
-    <ItemsList producto={products}/>
+    <ItemsList prod={products}/>
   );
 };
 

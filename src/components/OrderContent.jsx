@@ -1,13 +1,13 @@
 
 import * as Yup from 'yup';
 import { useContext } from 'react';
-import { CartContext } from './../context/CartContext';
+import { CartContext } from '../context/CartContext';
 import { Formik, ErrorMessage, Form, Field } from 'formik';
 import { Timestamp, getFirestore, collection, addDoc } from 'firebase/firestore';
 import { confirmationAlert } from '../helpers/Alerts';
 import { Link } from 'react-router-dom';
 import { documentId, query, where, writeBatch, getDocs } from 'firebase/firestore';
-import '../estilos/Order.css'
+import '../styles/Order.css'
 
 
 

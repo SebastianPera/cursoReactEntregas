@@ -1,7 +1,7 @@
 import { Card } from 'react-bootstrap';
 import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import '../estilos/Item.css'
+import '../styles/Item.css'
 
 
 function Item( {products} ) {
