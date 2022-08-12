@@ -1,18 +1,18 @@
-.cardEstilo{
-    height: 20rem;
+.cardStyle{
+  height: 20rem;
 }
-.contenedorImg{
-    height: 40%;
+.containerImgItem{
+  height: 40%;
 }
 .cardBody{
-    height: 40%;
+  height: 40%;
 }
 .card-header{
-    height: 20%;
+  height: 20%;
 }
 
 .cardImg{
-    width: auto;
-    height: 100%;
-    object-fit: contain;
+  width: auto;
+  height: 100%;
+  object-fit: contain;
 }

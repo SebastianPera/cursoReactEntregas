@@ -1,7 +1,6 @@
-import imagenCart from '../img/imagenCart.png'
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { CartContext } from '../context/CartContext';
-import { useState } from 'react';
+import imageCart from '../img/imageCart.png'
 import '../styles/CartWidget.css'
 
 
@@ -19,9 +18,9 @@ const CartWidget = () => {
   
 
   return (
-    <div className='contenedorCarrito'>
-        <img src={imagenCart} alt="carrito" className='imagenCart' />
-        <strong style={{color: "white"}}>{cart.length ? productsLength : ""}</strong>
+    <div className='containerCart'>
+      <img src={imageCart} alt="cartImg" className='imageCart' />
+      <strong style={{color: "white"}}>{cart.length ? productsLength : ""}</strong>
     </div>
   )
 }

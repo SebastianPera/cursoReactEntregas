@@ -34,6 +34,6 @@
 }
 
 .form-buttons{
-    display: flex;
-    justify-content: space-evenly;
+  display: flex;
+  justify-content: space-evenly;
 }

@@ -1,8 +1,8 @@
-.contenedorCarrito{
-    width: 100%;
-    display: flex;
-    justify-content: flex-end;
+.containerCart{
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
 }
-.imagenCart{
-    width: 40px;
+.imageCart{
+  width: 40px;
 }

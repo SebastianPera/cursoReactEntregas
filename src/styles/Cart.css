@@ -1,17 +1,17 @@
 .cartContainer{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
 }
 .listCartContainer{
-    width: 60%;
+  width: 60%;
 }
 .buttonsCart{
-    display: flex;
-    gap: 1rem;
-    align-items: center;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
 }
 .buttonsCart > p{
-    margin: 0;
+  margin: 0;
 }
