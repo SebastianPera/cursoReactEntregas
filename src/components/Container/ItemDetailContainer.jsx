@@ -21,7 +21,7 @@ const ItemDetailContainer = () => {
   }, [id])
   
   return ( loading ? (
-    <div className="text-center mt-4">
+    <div className="d-flex justify-content-center mt-5">
       <Spinner animation="border" role="status" variant="info"/>
     </div>
   ) : 

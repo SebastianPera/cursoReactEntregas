@@ -1,5 +1,5 @@
 body{background-color: #000}
-.card{border:none}
+.card{border:none !important}
 .product{background-color: #eee}
 .brand{font-size: 13px}
 .act-price{color:red;font-weight: 700}

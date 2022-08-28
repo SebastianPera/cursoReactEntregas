@@ -1,16 +1,23 @@
 .cartContainer{
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  align-content: center;
   width: 100%;
+  margin-top: 5rem;
+  justify-content:center;
+  gap: 7rem;
 }
-.listCartContainer{
-  width: 60%;
+
+.cartItems{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
+
 .buttonsCart{
   display: flex;
-  gap: 1rem;
+  gap: 10px;
   align-items: center;
+  justify-content: flex-end;
 }
 .buttonsCart > p{
   margin: 0;

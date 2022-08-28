@@ -1,20 +1,19 @@
 
 import { useContext } from 'react';
-import { Link } from 'react-router-dom';
 import { Timestamp, getFirestore, collection, addDoc, documentId, query, where, writeBatch, getDocs } from 'firebase/firestore';
 import { CartContext } from '../context/CartContext';
 import * as Yup from 'yup';
 import { Formik, ErrorMessage, Form, Field } from 'formik';
 import { confirmationAlert } from '../helpers/Alerts';
+import { useNavigate } from 'react-router-dom';
 import '../styles/Order.css'
-
 
 
 // Objeto para validar el form
 
 const FormValidation = Yup.object().shape({
   name: Yup.string()
-    .matches(/^[A-Za-z ]*$/, 'Ingrese solo letras y espacios')
+    .matches(/^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$/, 'Ingrese solo letras y espacios')
     .required("Por favor ingrese un nombre y un apellido"),
   email: Yup.string()
     .email("Email inválido")
@@ -26,15 +25,16 @@ const FormValidation = Yup.object().shape({
     .oneOf([Yup.ref("email")], "Los emails ingresados no coinciden"),
   phone: Yup.string()
     .required("Por favor ingrese un número de teléfono")
-    .matches(/^[0-9]+$/, "Por favor ingrese sólo números")
+    .matches(/^[0-9-+]+$/, "Por favor ingrese sólo números")
     .min(7, "El número telefónico es inválido"),
 });
 
 
 // Control del form
 
-export const OrderContent = () => {
+export const FormOrder = () => {
   const { cart, totalCart, deleteCart } = useContext(CartContext);
+  const navigate = useNavigate()
 
   async function formData(dataForm) {
     let newOrder = {
@@ -58,11 +58,13 @@ export const OrderContent = () => {
     const orders = collection(db, 'orders')
     addDoc(orders, newOrder)
     .then((resp) => 
-      confirmationAlert(
-        "Orden de compra exitosa",
-        `Nº de compra ${resp.id}`
-      )
+      // confirmationAlert(
+      //   "Orden de compra exitosa",
+      //   `Nº de compra ${resp.id}`
+      // )
+      navigate('/order/'+resp.id)
     )
+  
     .catch(err => console.log(err))
     .finally(() => deleteCart())
 
@@ -93,14 +95,8 @@ export const OrderContent = () => {
       > 
         {() => (
           <>   
-            {cart.length === 0 && (
-            <h3>
-              El carrito de compras está vacío. Visite nuestros <Link to='/'>productos</Link>
-            </h3>
-            )}
-
             {cart.length !== 0 && (
-              <Form>
+              <Form style={{width:'80%', backgroundColor:'#F2F2F2', padding:'1rem', borderRadius:'20px'}}>
                 <div className="form-group">
                   <label className="form-label">Nombre</label>
                   <Field name="name" className="form-input" placeholder="Ingresar nombre y apellido"/>
@@ -130,10 +126,11 @@ export const OrderContent = () => {
                     <ErrorMessage name="phone" />
                   </div>
                 </div>
+                <small style={{fontWeight:'bold', fontSize:'0.7rem'}}>Sus datos correctos nos permitirán entregarle los productos de forma correcta y oportuna.</small>
                 <div className="form-buttons">
-                  <button type="submit" className="btn btn-danger text-uppercase mt-2 px-2">
-                    Realizar compra
-                  </button>
+                    <button type="submit" className="btn btn-danger text-uppercase mt-2 px-2">
+                      Terminar Compra
+                    </button>
                   <button type="reset" className="btn btn-danger text-uppercase mt-2 px-2">
                     Vaciar formulario
                   </button>

@@ -5,29 +5,36 @@ import ItemListContainer from './components/Container/ItemListContainer';
 import Cart from './components/Container/Cart';
 import ItemDetailContainer from './components/Container/ItemDetailContainer';
 import NotFound from './components/NotFound';
-import { OrderForm } from './components/Container/Order';
-
+import OrderContainer from './components/Container/OrderContainer';
+import WhatsappWidget from './components/Widgets/WhatsappWidget/WhatsappWidget';
+import Footer from './components/Footer';
+import Authentication from './components/auth/Authentication'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css'
+import { AuthProvider } from './context/AuthContext.js';
 
 function App() {
   return (
-    <CartProvider>
-      <BrowserRouter>
-        <div className="App">
-          <NavBar/>
-          <Routes>
-            <Route index path='/' element={<ItemListContainer/>}/>
-            <Route path='/categoria/:categoryId' element={<ItemListContainer/>}/>
-            <Route path='/detail/:id' element={<ItemDetailContainer/>}/>
-            <Route path='/cart' element={<Cart/>}/>
-            <Route path='/checkout' element={<OrderForm/>}></Route>
-            <Route path='/404' element={<NotFound/>}/>
-            <Route path='*' element={<Navigate to='/404'/>}/> 
-          </Routes>
-        </div>
-      </BrowserRouter>
-    </CartProvider>
+    <AuthProvider>
+      <CartProvider>
+        <BrowserRouter>
+            <NavBar/>
+              <Routes>
+                <Route index path='/' element={<ItemListContainer/>}/>
+                <Route path='/categoria/:categoryId' element={<ItemListContainer/>}/>
+                <Route path='/detail/:id' element={<ItemDetailContainer/>}/>
+                <Route path='/auth' element={<Authentication/>}/>
+                <Route path='/cart' element={<Cart/>}/>
+                <Route path='/404' element={<NotFound/>}/>
+                <Route path='*' element={<Navigate to='/404'/>}/> 
+                <Route path='/order' element={<OrderContainer/>}/>
+                <Route path='/order/:idOrder' element={<OrderContainer/>} />
+              </Routes>
+            <Footer/>
+            <WhatsappWidget/>
+        </BrowserRouter>
+      </CartProvider>
+    </AuthProvider>
   )
 }
 

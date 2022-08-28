@@ -1,8 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
-import { CartContext } from '../context/CartContext';
-import imageCart from '../img/imageCart.png'
-import '../styles/CartWidget.css'
-
+import { CartContext } from '../../context/CartContext';
+import imageCart from '../../img/imageCart.png'
+import '../../styles/CartWidget.css'
 
 const CartWidget = () => {
 
@@ -18,9 +17,9 @@ const CartWidget = () => {
   
 
   return (
-    <div className='containerCart'>
+    <div className='containerCart position-relative'>
       <img src={imageCart} alt="cartImg" className='imageCart' />
-      <strong style={{color: "white"}}>{cart.length ? productsLength : ""}</strong>
+      <span className="position-absolute start-100 translate-middle badge rounded-pill bg-danger" style={{}}>{cart.length ? productsLength : ""}</span>
     </div>
   )
 }

@@ -1,14 +1,14 @@
 import Item from './Item';
-import { Container } from 'react-bootstrap';
+import '../styles/ItemList.css'
 
 
 function ItemsList({ prod }) {
   return(
-    <Container className="d-flex justify-content-evenly mt-4 flex-wrap w-100">
+    <div className="containerGreeting">
       {prod.map((element) => (
         <Item products={element} key={element.id} />
       ))}
-    </Container>
+    </div>
   );
 }
 

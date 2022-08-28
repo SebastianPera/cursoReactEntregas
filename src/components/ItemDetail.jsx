@@ -2,6 +2,7 @@ import { useContext } from 'react'
 import { Link } from 'react-router-dom';
 import { CartContext} from '../context/CartContext.js'
 import ItemCount from '../components/ItemCount'
+import { IoIosUndo } from "react-icons/io"
 import '../styles/ItemDetail.css'
 
 
@@ -25,10 +26,10 @@ function ItemDetail({ prod }) {
               </div>
               <div className="col-md-6">
                 <div className="product h-100 p-3">
-                  <div className="d-flex justify-content-between align-items-center">
-                    <div className="d-flex align-items-center"> <i className="fa fa-long-arrow-left"></i> <Link to='/'><span className="ml-1">Seguir comprando</span></Link> </div> <i className="fa fa-shopping-cart text-muted"></i>
-                  </div>
-                  <div className="mt-2 mb-2">
+                  <button className="btn btn-dark px-3 py-1">
+                    <Link style={{color:'white'}} to='/'><IoIosUndo/> Seguir comprando</Link>
+                  </button>
+                  <div className="mt-4 mb-2">
                     <h5 className="text-uppercase">{prod.nombre}</h5>
                     <div className="price d-flex flex-row align-items-center"> 
                       <span className="act-price">${prod.precio}</span>

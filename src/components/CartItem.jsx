@@ -1,6 +1,13 @@
 import '../styles/CartItem.css'
+import { useContext } from 'react';
+import { CartContext } from './../context/CartContext';
+import { AiTwotoneDelete } from "react-icons/ai";
 
-const CartItem = ({ prod, deleteCartById}) => {
+const CartItem = ({ prod, withDeleteCartById}) => {
+
+  const cartContext = useContext(CartContext);
+  const { deleteCartById } = cartContext;
+
   return (
     <article className="cardCart">
       <div className="containerImg">
@@ -9,7 +16,12 @@ const CartItem = ({ prod, deleteCartById}) => {
       <span className="itemName">{`(x ${prod.qty}) - ${prod.nombre}`}</span>
       <span className="itemPrice">$ {prod.precio * prod.qty}</span>
       <div className="containerBottom">
-        <button className="btn btn-danger" onClick={()=>deleteCartById(prod.id)}>X</button>
+        {
+          withDeleteCartById && (
+          <div className='trashButton'>
+            <AiTwotoneDelete type="button" onClick={()=>deleteCartById(prod.id)} style={{fontSize:'1.6rem'}}/>
+          </div>)
+        }
       </div>
     </article>
   )

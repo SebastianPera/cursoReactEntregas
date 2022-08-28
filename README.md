@@ -10,7 +10,7 @@ La app incluye:
 + Cantidad de artículos dentro del carrito en el Nav. 
 
 ## Link 🔗
-<<<<<<< HEAD
+
 La aplicación se puede visualizar en el siguiente [Link](https://graceful-pothos-20eb94.netlify.app)
 
 

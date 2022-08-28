@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { getProducts, getProductsByCategory } from '../../firebase/productService'
 import ItemsList from '../ItemsList';
 import { Spinner } from 'react-bootstrap';
-import '../../styles/ItemListContainer.css';
+import Carrousel from './../Carrousel/Carrousel';
 
 const ItemListContainer = () => {
   const [products , setProducts] = useState([]);
@@ -25,13 +25,17 @@ const ItemListContainer = () => {
     }, 500);
   }, [categoryId])
  
-  return ( loading ? (
-    <div className="text-center mt-4">
-      <Spinner animation="border" role="status" variant="info"/>
-    </div>
-  ) : 
-    <ItemsList prod={products}/>
-  );
+  return ( 
+    <>
+      <Carrousel/>
+      {loading ? (
+      <div className="d-flex justify-content-center mt-5">
+        <Spinner animation="border" role="status" variant="info"/>
+      </div> )
+      : 
+      <ItemsList prod={products}/>}
+    </>
+  )
 };
 
 export default ItemListContainer

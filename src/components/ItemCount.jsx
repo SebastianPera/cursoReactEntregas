@@ -49,7 +49,7 @@ const ItemCount = ({ initial, onAdd, prod}) => {
       {stockComparative === 0 || <button className="btn btn-danger text-uppercase mt-2 px-2" style={{width: '100%'}} onClick={() => {onAdd(qty); setQty(initial)}} disabled={(stockComparative === 0) ? true : null}>
         Añadir al carrito
       </button>}
-      { cart.length !== 0 && <Link to="/cart"><button className="btn btn-danger text-uppercase mt-2 px-2" style={{width: '100%'}}>Comprar</button></Link> }
+      { cart.length !== 0 && <Link to="/cart"><button className="btn btn-danger text-uppercase mt-2 px-2" style={{width: '100%'}}>Terminar Compra</button></Link> }
     </div>
   )
 };
