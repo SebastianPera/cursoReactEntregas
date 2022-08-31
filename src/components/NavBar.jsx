@@ -14,10 +14,14 @@ const NavBar = () =>{
   const navigate = useNavigate()
 
   const handleLogout = async () => {
-    await logout()
-    navigate('/')
+    try {
+      await logout()
+      navigate('/')   
+    } catch (error) {
+      console.log(error);
+    }
   }
- console.log(user );
+
   return(
     <Navbar collapseOnSelect expand="lg"  >
       <Container>
@@ -48,7 +52,7 @@ const NavBar = () =>{
                     onClick={() => setShow(!show)}
                   />
                   {show && (
-                    <div className="navbar_profile_img_dropdown">
+                    <div className="navbar_profile_img_dropdown" onMouseLeave={() => setShow(!show)}>
                       <div>
                         <AiOutlineUser />
                         <p>Profile</p>

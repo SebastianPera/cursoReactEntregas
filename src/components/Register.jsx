@@ -1,4 +1,3 @@
-import '../styles/Register.css'
 import { AiOutlineEye } from 'react-icons/ai';
 import { AiOutlineLock } from 'react-icons/ai';
 import { AiOutlineMail } from 'react-icons/ai';

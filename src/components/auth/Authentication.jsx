@@ -3,9 +3,9 @@ import { FcGoogle } from "react-icons/fc";
 import { useState } from "react";
 import SignIn from '../SignIn';
 import Register from '../Register';
-import "./Authentication.css";
 import { useAuth } from "../../context/AuthContext";
 import { useNavigate } from 'react-router-dom';
+import "./Authentication.css";
 
 const Authentication = () => {
   
@@ -22,7 +22,6 @@ const Authentication = () => {
       console.log(error.message);
     }
   }
-
 
   return (
     <div className="auth-container">

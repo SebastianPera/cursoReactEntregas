@@ -9,9 +9,10 @@ import OrderContainer from './components/Container/OrderContainer';
 import WhatsappWidget from './components/Widgets/WhatsappWidget/WhatsappWidget';
 import Footer from './components/Footer';
 import Authentication from './components/auth/Authentication'
+import { AuthProvider } from './context/AuthContext.js';
+import ForgotPassword from './components/ForgotPassword';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css'
-import { AuthProvider } from './context/AuthContext.js';
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
                 <Route path='*' element={<Navigate to='/404'/>}/> 
                 <Route path='/order' element={<OrderContainer/>}/>
                 <Route path='/order/:idOrder' element={<OrderContainer/>} />
+                <Route path='/forgotpassword' element={<ForgotPassword/>}/>
               </Routes>
             <Footer/>
             <WhatsappWidget/>

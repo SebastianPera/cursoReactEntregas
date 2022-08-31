@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { AiOutlineMail, AiOutlineEye, AiOutlineLock } from 'react-icons/ai';
 import './auth/Authentication.css'
 
@@ -68,7 +68,9 @@ function SignIn() {
             className="pass-input-icons"
           />
         </div>
-        <span>Forgot password?</span>
+        <Link to={'/forgotpassword'}>
+          <span>Forgot password?</span>
+        </Link>
         <div className="sign-in-btn">
           <button type="submit">Sign in</button>
         </div>
